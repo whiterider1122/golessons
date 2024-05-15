@@ -95,8 +95,9 @@ func main() {
 		// Считываем строку, пока не будет введена новая строка (\n)
 		input, err := reader.ReadString('\n')
 		if err != nil {
-			fmt.Println("Ошибка при чтении строки:", err)
-			return
+			//fmt.Println("Ошибка при чтении строки:", err)
+			//return
+			panic("Ошибка при чтении строки: " + err.Error())
 		}
 
 		// Удаляем пробельные символы в начале и в конце строки
@@ -122,8 +123,9 @@ func main() {
 		for _, count := range counts {
 			operatorCount += count
 			if count > 1 {
-				fmt.Println("Ошибка: один из операторов встречается больше одного раза.")
-				return
+				//fmt.Println("Ошибка: один из операторов встречается больше одного раза.")
+				//return
+				panic("один из операторов встречается больше одного раза.")
 			}
 		}
 
@@ -137,30 +139,36 @@ func main() {
 				if isroman(oper1, oper2) {
 					res := calc(roman2int(oper1), roman2int(oper2), operator)
 					if res == -1 {
-						fmt.Println("Ошибка: Римские числа не могут быть отрицательными.")
-						return
+						//fmt.Println("Ошибка: Римские числа не могут быть отрицательными.")
+						//return
+						panic("Римские числа не могут быть отрицательными.")
 					}
 					fmt.Println("Результат:", oper1, string(operator), oper2, "=", int2roman(res))
 				} else if isdigit(oper1, oper2) {
 					num1, err := strconv.Atoi(oper1)
 					if err != nil {
-						fmt.Println("Ошибка:", err)
-						return
+						//fmt.Println("Ошибка:", err)
+						//return
+						panic("Ошибка: " + err.Error())
 					}
 					num2, err := strconv.Atoi(oper2)
 					if err != nil {
-						fmt.Println("Ошибка:", err)
-						return
+						//fmt.Println("Ошибка:", err)
+						//return
+						panic("Ошибка: " + err.Error())
 					}
 					fmt.Println("Результат:", oper1, string(operator), oper2, "=", calc(num1, num2, operator))
 				} else {
-					fmt.Println("Ошибка: Оба числа должны быть либо римскими либо арабскими.")
+					//fmt.Println("Ошибка: Оба числа должны быть либо римскими либо арабскими.")
+					panic("Оба числа должны быть либо римскими либо арабскими.")
 				}
 			} else {
-				fmt.Println("Должно быть только два числа.")
+				//fmt.Println("Должно быть только два числа.")
+				panic("Должно быть только два числа.")
 			}
 		} else {
-			fmt.Println("Ошибка: строка должна содержать ровно один оператор (+, -, *, /).")
+			//fmt.Println("Ошибка: строка должна содержать ровно один оператор (+, -, *, /).")
+			panic("строка должна содержать ровно один оператор (+, -, *, /).")
 		}
 	}
 }
